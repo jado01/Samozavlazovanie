@@ -1,0 +1,16 @@
+# Súkromné originálne fotografie. Môžu obsahovať EXIF/GPS a širšie zábery domácnosti.
+assets/photos/original/*
+!assets/photos/original/README.md
+
+# Lokálne tajomstvá a konfigurácia Wi-Fi/API.
+secrets.yaml
+*.secret.yaml
+.env
+
+# Dočasné súbory editorov a operačného systému.
+.DS_Store
+Thumbs.db
+*.tmp
+
+.agents/
+
