@@ -15,6 +15,26 @@ Aktualizované: 2026-06-30
 - Home Assistant beží na Raspberry Pi 5,
 - ďalší Linux server beží na Raspberry Pi 3.
 
+### Home Assistant – overený systémový stav
+
+Stav overený cez **System information** dňa 2026-06-30:
+
+- inštalácia: Home Assistant OS,
+- Home Assistant Core: 2026.6.4,
+- Home Assistant OS: 18.0,
+- Supervisor: 2026.06.2,
+- architektúra: aarch64,
+- doska: Raspberry Pi 5 (`rpi5-64`),
+- úložisko: NVMe 468,7 GB; systém z neho priamo bootuje,
+- stav systému: `Healthy: true`, `Supported: true`,
+- časové pásmo: Europe/Bratislava,
+- Zigbee koordinátor: Home Assistant Connect ZBT-1,
+- Zigbee vrstva: Zigbee2MQTT 2.12.0-1 a Mosquitto broker 7.1.0,
+- vzdialený prístup: Tailscale,
+- zálohovanie: Home Assistant Google Drive Backup,
+- ďalšie relevantné aplikácie: Terminal & SSH, Get HACS a Node-RED,
+- ESPHome Device Builder zatiaľ nie je nainštalovaný.
+
 Južná orientácia a zasklenie znamenajú riziko vysokej teploty a rýchlo sa meniacej spotreby vody. Teplota balkóna preto bude jedným zo sledovaných údajov.
 
 ## Rastliny
