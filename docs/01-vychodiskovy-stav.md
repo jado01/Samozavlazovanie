@@ -8,7 +8,8 @@ Aktualizované: 2026-07-10
 - orientácia: juh,
 - zasklenie: štyri časti; krajné sú bežne zafixované, používajú sa dve stredné,
 - dostupná elektrická zásuvka,
-- Wi-Fi je dostupné v susednej izbe; pri zatvorených balkónových dverách bol na balkóne nameraný slabší signál približne -74 až -82 dBm,
+- Wi-Fi je dostupné v susednej izbe; pri zatvorených balkónových dverách bol mobilom nameraný slabší signál približne -74 až -82 dBm,
+- po prvom sprevádzkovaní ESP32/ESPHome bol v izbe na stole pozorovaný signál približne -66 dBm a na balkóne pri zatvorenom zasklení približne -93 dBm,
 - káblové pripojenie je možné,
 - predbežné miesto nádrže: pravý roh pod jahodami,
 - v blízkosti plánovanej nádrže je zásuvka 230 V bez deklarovaného IP krytia,
@@ -37,7 +38,7 @@ Stav overený cez **System information** dňa 2026-06-30:
 
 Južná orientácia a zasklenie znamenajú riziko vysokej teploty a rýchlo sa meniacej spotreby vody. Teplota balkóna preto bude jedným zo sledovaných údajov.
 
-Namerané hodnoty Wi-Fi sú pre ESP32 hraničné. Systém sa preto nemá spoliehať na nepretržité spojenie s Home Assistantom. Kritické bezpečnostné pravidlá, napríklad maximálna dĺžka chodu čerpadla, musia bežať lokálne priamo v ESP32. Pred finálnym umiestnením elektroniky sa Wi-Fi overí aj priamo cez ESPHome.
+Namerané hodnoty Wi-Fi sú pre ESP32 na balkóne veľmi slabé. Systém sa preto nesmie spoliehať na nepretržité spojenie s Home Assistantom. Kritické bezpečnostné pravidlá, napríklad maximálna dĺžka chodu čerpadla, musia bežať lokálne priamo v ESP32. Pred prevádzkou bez dozoru bude potrebné zlepšiť Wi-Fi pokrytie alebo zmeniť umiestnenie elektroniky.
 
 ## Rastliny
 

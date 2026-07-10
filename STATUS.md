@@ -27,26 +27,35 @@ Navrhnúť, postaviť a zdokumentovať spoľahlivý automatický zavlažovací s
 - doplnené rozmery textilného vrecka, črepníkov paradajok a poloha zásuvky,
 - zmeraný predbežný Wi-Fi signál na balkóne pri zatvorených dverách: približne -74 až -82 dBm,
 - doplnený dostupný riadiaci hardvér: ESP32-WROOM-32/HW-394 s USB-C a dva typy reléových modulov,
+- vytvorené ESPHome zariadenie `balkon-zavlaha`,
+- prvý firmware bol úspešne skompilovaný, nahratý do ESP32 a zariadenie bolo pridané do Home Assistant,
+- zariadenie je v Home Assistant zaradené do oblasti `Balcony`,
+- v izbe na stole bol cez ESP32/ESPHome pozorovaný Wi-Fi signál približne -66 dBm,
+- do ESPHome boli doplnené diagnostické entity: Wi-Fi signál, uptime a restart button,
+- test restart buttonu prebehol úspešne; uptime sa po reštarte vynuloval a zariadenie sa znova pripojilo,
+- na balkóne pri zatvorenom zasklení bol cez ESP32/ESPHome pozorovaný veľmi slabý Wi-Fi signál približne -93 dBm,
 - do lokálneho priečinka originálnych fotografií boli pridané nové zábery balkóna.
 
 ## Čo práve riešim
 
-Projekt je v prípravnej fáze pred fyzickým návrhom a nákupom komponentov. Hlavné rozmery balkóna, základné výšky jahôd, rozmery vreciek, črepníkov, poloha zásuvky a predbežný Wi-Fi signál sú už doplnené. Ďalej treba skontrolovať fotografie, identifikovať dostupné elektronické moduly a spraviť základné merania spotreby vody.
+Projekt je v prvej funkčnej ESPHome fáze. ESP32 je online v Home Assistant, diagnostické entity fungujú a základné ovládanie cez HA bolo overené reštartom zariadenia. Meranie na balkóne ukázalo veľmi slabý Wi-Fi signál, preto treba pred prevádzkou bez dozoru vyriešiť lepšie pokrytie alebo umiestnenie elektroniky. Používateľ zváži možnosti úpravy domácej siete, napríklad presun Wi-Fi routera bližšie k izbe pri balkóne s využitím existujúcich káblových trás. Následne treba pokračovať meraním spotreby vody pred výberom čerpadla.
 
 ## Najbližší odporúčaný krok
 
-Pokračovať malou meracou reláciou podľa `docs/03-podklady-po-navrate.md`:
+Pokračovať stabilizačným a meracím krokom podľa `docs/03-podklady-po-navrate.md`:
 
-1. skontrolovať nové fotografie a vybrať, ktoré zábery budú vhodné do verejnej dokumentácie po odstránení EXIF/GPS údajov,
-2. overiť fyzický pinout ESP32 dosky a otestovať reléový modul na stole bez čerpadla,
-3. neskôr overiť Wi-Fi priamo cez ESP32/ESPHome a odmerať množstvo vody pre jahody a paradajky oddelene,
-4. výsledky spolu skontrolovať a zapísať do dokumentácie ešte pred výberom čerpadla a nákupom dielov.
+1. overiť, či sa dá ESP32 umiestniť bližšie k lepšiemu Wi-Fi signálu bez zhoršenia bezpečnosti pri vode,
+2. zvážiť dočasné alebo trvalé zlepšenie 2,4 GHz Wi-Fi pokrytia pri balkóne,
+3. skontrolovať nové fotografie a vybrať, ktoré zábery budú vhodné do verejnej dokumentácie po odstránení EXIF/GPS údajov,
+4. overiť fyzický pinout ESP32 dosky a otestovať reléový modul na stole bez čerpadla,
+5. odmerať množstvo vody pre jahody a paradajky oddelene,
+6. výsledky spolu skontrolovať a zapísať do dokumentácie ešte pred výberom čerpadla a nákupom dielov.
 
 ## Otvorené otázky a problémy
 
 - presné doladenie časti trás hadíc,
 - reálna denná spotreba vody jahôd a paradajok oddelene,
-- kvalita Wi-Fi signálu je hraničná; treba overiť stabilitu priamo cez ESP32/ESPHome alebo doplniť lepšie pokrytie,
+- kvalita Wi-Fi signálu na balkóne je veľmi slabá; ESP32 ukázalo približne -66 dBm v izbe a približne -93 dBm na balkóne pri zatvorenom zasklení,
 - fyzické overenie pinoutu ESP32 dosky podľa potlače a presný typ snímača teploty/vlhkosti,
 - použiteľnosť dostupného 5 V reléového modulu s 3,3 V logikou ESP32,
 - voľba čerpadla, výkonového spínania, hadíc a kvapkovačov až po meraní,
