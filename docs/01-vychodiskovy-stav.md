@@ -1,14 +1,14 @@
 # Východiskový stav
 
-Aktualizované: 2026-06-30
+Aktualizované: 2026-07-10
 
 ## Balkón
 
-- približné rozmery: 1 × 3,5 m,
+- zamerané rozmery: výška 257 cm, šírka 96 cm, dĺžka 276 cm,
 - orientácia: juh,
 - zasklenie: štyri časti; krajné sú bežne zafixované, používajú sa dve stredné,
 - dostupná elektrická zásuvka,
-- Wi-Fi je dostupné v susednej izbe; pokrytie balkóna sa ešte zmeria,
+- Wi-Fi je dostupné v susednej izbe; pri zatvorených balkónových dverách bol na balkóne nameraný slabší signál približne -74 až -82 dBm,
 - káblové pripojenie je možné,
 - predbežné miesto nádrže: pravý roh pod jahodami,
 - v blízkosti plánovanej nádrže je zásuvka 230 V bez deklarovaného IP krytia,
@@ -33,18 +33,27 @@ Stav overený cez **System information** dňa 2026-06-30:
 - vzdialený prístup: Tailscale,
 - zálohovanie: Home Assistant Google Drive Backup,
 - ďalšie relevantné aplikácie: Terminal & SSH, Get HACS a Node-RED,
-- ESPHome Device Builder zatiaľ nie je nainštalovaný.
+- ESPHome Device Builder je nainštalovaný a spustený; zapnuté je automatické spustenie aj watchdog.
 
 Južná orientácia a zasklenie znamenajú riziko vysokej teploty a rýchlo sa meniacej spotreby vody. Teplota balkóna preto bude jedným zo sledovaných údajov.
+
+Namerané hodnoty Wi-Fi sú pre ESP32 hraničné. Systém sa preto nemá spoliehať na nepretržité spojenie s Home Assistantom. Kritické bezpečnostné pravidlá, napríklad maximálna dĺžka chodu čerpadla, musia bežať lokálne priamo v ESP32. Pred finálnym umiestnením elektroniky sa Wi-Fi overí aj priamo cez ESPHome.
 
 ## Rastliny
 
 - 2 malé črepníky s cherry paradajkami,
 - 10 jahôd v dvoch zvislých textilných kvetináčoch,
 - jahody sú v piatich spodných vreckách každého kvetináča,
+- každý textilný kvetináč má 7 vreciek, horné 2 vrecká sa zatiaľ nepoužívajú,
+- výšky vreciek od podlahy smerom zhora nadol: 145 cm, 132 cm, 119 cm, 105 cm, 92 cm, 78 cm, 66 cm,
+- približné rozmery jedného textilného vrecka: šírka 23 cm, výška 12 cm, roztiahnutá hĺbka v strede približne 12 cm,
 - horné vrecká pri preliatí prepúšťajú vodu nižšie,
 - cez najnižšie vrecká voda ďalej nepretečie,
 - jahody sú na západnej stene balkóna.
+
+Plánované miesto nádrže je pod jahodami. Paradajky sú v dvoch okrúhlych črepníkoch na podlahe; približná vzdialenosť rozvodu od nádrže k paradajkám po zemi je 240 cm. Črepník paradajky má horný priemer približne 15 cm, výšku s integrovanou miskou 15 cm, výšku bez misky približne 12 cm a spodný priemer približne 12 cm.
+
+Elektrická zásuvka je v rohu balkóna pod paradajkami. Vzdialenosť od plánovaného miesta nádrže je do 1 m. Spodná hrana zásuvky je približne 12 cm nad podlahou.
 
 Zalievanie iba zhora by bolo ťažko kontrolovateľné: horné rastliny by mohli byť preliate a spodné nedostatočne zavlažené. Predbežne sa preto počíta so samostatným vývodom ku každému obsadenému vrecku. Prietoky sa doladia meraním.
 
@@ -80,5 +89,6 @@ Prijaté boli fotografie:
 
 - `PXL_20260620_144653523.jpg` – dva textilné vertikálne kvetináče s jahodami,
 - `PXL_20260614_084943246.jpg` – čelný pohľad na štvordielne zasklenie balkóna.
+- `PXL_20260710_084753643.jpg`, `PXL_20260710_084801390.jpg`, `PXL_20260710_084810882.jpg` – doplňujúca fotodokumentácia balkóna po návrate.
 
 Originály boli skopírované do `assets/photos/original/` a sú zámerne ignorované Gitom. Kontrola 2026-06-30 potvrdila, že oba súbory obsahujú EXIF aj GPS údaje, preto sa nesmú priamo publikovať. Po návrate sa doplní kompletná fotografická séria podľa kontrolného zoznamu. Vybrané zábery sa pred zverejnením očistia a uložia do `docs/images/`.

@@ -4,7 +4,9 @@ Zdroj: používateľský súpis `Arduino HW.txt`, načítaný 2026-06-30.
 
 ## Potenciálne použiteľné priamo v projekte
 
-- ESP32 – hlavná riadiaca jednotka,
+- ESP32-WROOM-32 z HomeBrainz – hlavná riadiaca jednotka; podľa stránky produktu ide o 30-pin modul HW-394 s USB-C, napájaním 5 V/1 A, Wi-Fi 802.11 b/g/n, Bluetooth v4.2 BR/EDR + BLE, SPI flash 32 Mbit a rozmermi približne 54 × 28 × 10 mm; presný pinout sa ešte overí podľa fyzickej dosky pred prvým zapojením,
+- reléový modul s relé SRD-12VDC-SL-C – 12 V cievka, svorky `+12V`, `GND`, `COM`, `NC`, `NO`; použiteľný skôr ako samostatný 12 V spínací modul, nie priamo z GPIO ESP32,
+- 1-kanálový reléový modul s relé SRD-5VDC-SL-C – 5 V modul so vstupmi `VCC`, `GND`, `IN` a jumperom high/low level trigger; použiteľnosť s 3,3 V logikou ESP32 sa musí otestovať,
 - približne 3 malé reléové moduly – použiteľnosť sa overí podľa napätia, logiky a prúdového zaťaženia,
 - Zigbee záplavový senzor – doplnkový alarm cez Home Assistant,
 - snímač teploty a vlhkosti, modrý so 4 vývodmi – treba identifikovať presný typ,
@@ -23,6 +25,10 @@ Zdroj: používateľský súpis `Arduino HW.txt`, načítaný 2026-06-30.
 ## Poznámky k výberu
 
 - ESP32 je vhodnejšie než klasické Arduino, pretože má sieťové pripojenie a priamu podporu ESPHome.
+- Bežné ESP32-WROOM-32 podporuje 2,4 GHz Wi-Fi, nie 5 GHz Wi-Fi. Nameraný signál na balkóne sa preto hodnotí v 2,4 GHz pásme.
+- GPIO piny ESP32 pracujú s 3,3 V logikou a nesmú byť zaťažované priamo cievkou relé alebo čerpadlom.
+- Doska má na produktovej stránke pinout pre 30-pin variant. Pred zapojením sa bude porovnávať s potlačou na reálnej doske, pretože ESP32 vývojové dosky môžu mať rôzne rozloženie pinov aj pri rovnakom čipe.
+- Relé SRD-5VDC-SL-C a SRD-12VDC-SL-C majú kontakty typicky označené pre 10 A pri vybraných AC/DC napätiach, ale pre trvalé riešenie pri vode sa bude dimenzovanie posudzovať konzervatívne podľa reálneho čerpadla a napájania.
 - Arduino Nano, Uno, Mega ani Esplora nie sú plánované pre základnú zostavu. Použijú sa iba v samostatnom vzdelávacom experimente, ak na to vznikne konkrétny dôvod.
 - Orange Pi a ďalšie jednodeskové počítače nie sú súčasťou návrhu.
 - Tuya Wi-Fi zariadenia ani Tuya cloud sa v projekte nebudú používať.
