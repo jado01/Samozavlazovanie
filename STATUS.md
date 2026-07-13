@@ -1,6 +1,6 @@
 # Stav projektu
 
-Posledná aktualizácia: **2026-07-10**
+Posledná aktualizácia: **2026-07-13**
 
 Tento projekt je súčasťou centrálneho projektu **studijna-cesta**. Slúži zároveň ako praktické vzdelávanie v oblasti ESP32, ESPHome, Home Assistant, elektroniky, automatizácie, merania a Gitu a ako budúci portfóliový projekt.
 
@@ -34,34 +34,41 @@ Navrhnúť, postaviť a zdokumentovať spoľahlivý automatický zavlažovací s
 - do ESPHome boli doplnené diagnostické entity: Wi-Fi signál, uptime a restart button,
 - test restart buttonu prebehol úspešne; uptime sa po reštarte vynuloval a zariadenie sa znova pripojilo,
 - na balkóne pri zatvorenom zasklení bol cez ESP32/ESPHome pozorovaný veľmi slabý Wi-Fi signál približne -93 dBm,
-- do lokálneho priečinka originálnych fotografií boli pridané nové zábery balkóna.
+- do lokálneho priečinka originálnych fotografií boli pridané nové zábery balkóna,
+- rozhodnuté, že prvá verzia bude používať peristaltické 12 V čerpadlo riadené cez MOSFET modul, nie priame spínanie z ESP32 ani smart zásuvku,
+- smart zásuvka bola vyhodnotená ako možný hlavný servisný alebo bezpečnostný vypínač napájania, nie ako hlavný spôsob dávkovania vody,
+- vybraná prvá objednávka hardvéru: peristaltické čerpadlo, MOSFET LR7843, BME280, plavákový snímač hladiny, pôdne analógové vlhkomery, silikónová hadička a lacný vodný/dažďový senzor na experimenty,
+- DHT11 zo staršieho Arduino kitu bude použitý len ako učebný a porovnávací senzor; pre balkónové meranie je preferovaný BME280,
+- T-kusy, kvapkovače a finálny rozvod vody boli odložené až po kalibrácii reálneho prietoku čerpadla.
 
 ## Čo práve riešim
 
-Projekt je v prvej funkčnej ESPHome fáze. ESP32 je online v Home Assistant, diagnostické entity fungujú a základné ovládanie cez HA bolo overené reštartom zariadenia. Meranie na balkóne ukázalo veľmi slabý Wi-Fi signál, preto treba pred prevádzkou bez dozoru vyriešiť lepšie pokrytie alebo umiestnenie elektroniky. Používateľ zváži možnosti úpravy domácej siete, napríklad presun Wi-Fi routera bližšie k izbe pri balkóne s využitím existujúcich káblových trás. Následne treba pokračovať meraním spotreby vody pred výberom čerpadla.
+Projekt je v prvej funkčnej ESPHome fáze. ESP32 je online v Home Assistant, diagnostické entity fungujú a základné ovládanie cez HA bolo overené reštartom zariadenia. Wi-Fi na balkóne je slabé, ale používateľ ho teraz nechce riešiť ako blokujúcu tému; zlepšenie pokrytia zostáva neskorší stabilizačný krok. Aktuálne sa čaká na objednaný hardvér pre prvé stolové testy senzorov, MOSFET spínania a čerpadla. Vodné rozvody k rastlinám sa budú navrhovať až po odmeraní reálneho prietoku čerpadla.
 
 ## Najbližší odporúčaný krok
 
-Pokračovať stabilizačným a meracím krokom podľa `docs/03-podklady-po-navrate.md`:
+Po doručení objednávky pokračovať stolovým testovaním bez vody pri rastlinách:
 
-1. overiť, či sa dá ESP32 umiestniť bližšie k lepšiemu Wi-Fi signálu bez zhoršenia bezpečnosti pri vode,
-2. zvážiť dočasné alebo trvalé zlepšenie 2,4 GHz Wi-Fi pokrytia pri balkóne,
-3. skontrolovať nové fotografie a vybrať, ktoré zábery budú vhodné do verejnej dokumentácie po odstránení EXIF/GPS údajov,
-4. overiť fyzický pinout ESP32 dosky a otestovať reléový modul na stole bez čerpadla,
-5. odmerať množstvo vody pre jahody a paradajky oddelene,
-6. výsledky spolu skontrolovať a zapísať do dokumentácie ešte pred výberom čerpadla a nákupom dielov.
+1. pripojiť BME280 k ESP32 a dostať teplotu, vlhkosť a tlak do Home Assistant,
+2. porovnať hodnoty BME280 s dostupným DHT11 a prípadným existujúcim teplomerom v HA,
+3. otestovať pôdny vlhkomer nasucho a vo vlhkom substráte, najprv s dôrazom na bezpečné napäťové úrovne pre analógový vstup ESP32,
+4. otestovať MOSFET modul bez čerpadla alebo s bezpečnou skúšobnou záťažou,
+5. pripojiť čerpadlo cez MOSFET a v pohári odmerať reálny prietok v ml/min,
+6. výsledky zapísať do dokumentácie a až potom navrhnúť T-kusy, kvapkovače a rozvod k jahodám/paradajkám.
 
 ## Otvorené otázky a problémy
 
-- presné doladenie časti trás hadíc,
-- reálna denná spotreba vody jahôd a paradajok oddelene,
+- presné doladenie trás hadíc, T-kusov a kvapkovačov po kalibrácii čerpadla,
+- reálna denná spotreba vody jahôd a paradajok oddelene; aktuálny hrubý odhad pre jahody je približne 100 ml na jedno vrecko,
 - kvalita Wi-Fi signálu na balkóne je veľmi slabá; ESP32 ukázalo približne -66 dBm v izbe a približne -93 dBm na balkóne pri zatvorenom zasklení,
-- fyzické overenie pinoutu ESP32 dosky podľa potlače a presný typ snímača teploty/vlhkosti,
-- použiteľnosť dostupného 5 V reléového modulu s 3,3 V logikou ESP32,
-- voľba čerpadla, výkonového spínania, hadíc a kvapkovačov až po meraní,
-- rozhodnutie medzi jedným čerpadlom s ventilmi a dvoma čerpadlami,
+- fyzické overenie pinoutu ESP32 dosky podľa potlače,
+- presný typ staršieho snímača teploty/vlhkosti z Arduino kitu; pravdepodobne DHT11,
+- použiteľnosť pôdneho vlhkomera pri napájaní z 3,3 V alebo potreba deliča napätia pri 5 V napájaní,
+- rozhodnutie, či bude prvá vodná verzia používať jedno čerpadlo pre všetko alebo sa neskôr oddelia jahody a paradajky samostatnými čerpadlami,
 - overenie elektrickej bezpečnosti zásuvky pri plánovanom umiestnení vody,
 - overenie odtoku a správania vody vo vertikálnych textilných vreckách,
+- zváženie smart zásuvky ako hlavného bezpečnostného odpojenia napájania,
+- budúce rozšírenia: senzor svetla, robustnejšie meranie vetra pre automatizáciu zasklenia a prípadný dažďový/únikový senzor,
 - výber verejných fotografií a ich očistenie od EXIF/GPS údajov.
 
 ## Pravidlo aktualizácie
