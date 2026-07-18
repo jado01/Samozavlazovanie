@@ -1,6 +1,6 @@
 # Východiskový stav
 
-Aktualizované: 2026-07-10
+Aktualizované: 2026-07-18
 
 ## Balkón
 
@@ -39,6 +39,17 @@ Stav overený cez **System information** dňa 2026-06-30:
 Južná orientácia a zasklenie znamenajú riziko vysokej teploty a rýchlo sa meniacej spotreby vody. Teplota balkóna preto bude jedným zo sledovaných údajov.
 
 Namerané hodnoty Wi-Fi sú pre ESP32 na balkóne veľmi slabé. Systém sa preto nesmie spoliehať na nepretržité spojenie s Home Assistantom. Kritické bezpečnostné pravidlá, napríklad maximálna dĺžka chodu čerpadla, musia bežať lokálne priamo v ESP32. Pred prevádzkou bez dozoru bude potrebné zlepšiť Wi-Fi pokrytie alebo zmeniť umiestnenie elektroniky.
+
+### Prvý pripojený senzor
+
+Dňa 2026-07-18 bol k ESP32 pripojený senzor BME280 na meranie teploty, vlhkosti a tlaku vzduchu. Senzor je pripojený cez I2C zbernicu:
+
+- `VIN` na BME280 -> `3V3` na ESP32,
+- `GND` na BME280 -> `GND` na ESP32,
+- `SDA` na BME280 -> `GPIO21` na ESP32,
+- `SCL` na BME280 -> `GPIO22` na ESP32.
+
+ESPHome I2C scan našiel senzor na adrese `0x76`. Po bezdrôtovej aktualizácii firmvéru pribudli v Home Assistant entity `Balkon Teplota`, `Balkon Vlhkost` a `Balkon Tlak`. Prvé pozorované hodnoty boli približne 26,8 °C, 40,8 % a 930,4 hPa. Po dýchnutí na senzor sa hodnoty menili, čím sa overilo živé meranie.
 
 ## Rastliny
 

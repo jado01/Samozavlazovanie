@@ -1,6 +1,6 @@
 # Stav projektu
 
-Posledná aktualizácia: **2026-07-13**
+Posledná aktualizácia: **2026-07-18**
 
 Tento projekt je súčasťou centrálneho projektu **studijna-cesta**. Slúži zároveň ako praktické vzdelávanie v oblasti ESP32, ESPHome, Home Assistant, elektroniky, automatizácie, merania a Gitu a ako budúci portfóliový projekt.
 
@@ -20,7 +20,7 @@ Navrhnúť, postaviť a zdokumentovať spoľahlivý automatický zavlažovací s
 - overená inštalácia Home Assistant OS na Raspberry Pi 5 s NVMe,
 - vytvorená manuálna záloha Home Assistant,
 - nainštalovaný a spustený ESPHome Device Builder; zapnuté automatické spustenie a watchdog,
-- používateľ sa oboznámil so základnou úlohou ESP32 a ESPHome.
+- používateľ sa oboznámil so základnou úlohou ESP32 a ESPHome,
 - zamerané hlavné rozmery balkóna: výška 257 cm, šírka 96 cm, dĺžka 276 cm,
 - doplnené výšky vreciek vo vertikálnych textilných kvetináčoch,
 - doplnená vzdialenosť od plánovanej nádrže k paradajkám: približne 240 cm po zemi,
@@ -39,22 +39,26 @@ Navrhnúť, postaviť a zdokumentovať spoľahlivý automatický zavlažovací s
 - smart zásuvka bola vyhodnotená ako možný hlavný servisný alebo bezpečnostný vypínač napájania, nie ako hlavný spôsob dávkovania vody,
 - vybraná prvá objednávka hardvéru: peristaltické čerpadlo, MOSFET LR7843, BME280, plavákový snímač hladiny, pôdne analógové vlhkomery, silikónová hadička a lacný vodný/dažďový senzor na experimenty,
 - DHT11 zo staršieho Arduino kitu bude použitý len ako učebný a porovnávací senzor; pre balkónové meranie je preferovaný BME280,
-- T-kusy, kvapkovače a finálny rozvod vody boli odložené až po kalibrácii reálneho prietoku čerpadla.
+- T-kusy, kvapkovače a finálny rozvod vody boli odložené až po kalibrácii reálneho prietoku čerpadla,
+- prvý fyzický senzor BME280 bol pripájkovaný, pripojený k ESP32 cez I2C a úspešne zobrazený v Home Assistant,
+- overené zapojenie BME280: `VIN -> 3V3`, `GND -> GND`, `SDA -> GPIO21`, `SCL -> GPIO22`,
+- ESPHome I2C scan našiel BME280 na adrese `0x76`,
+- v Home Assistant pribudli entity `Balkon Teplota`, `Balkon Vlhkost` a `Balkon Tlak`; prvé pozorované hodnoty boli približne 26,8 °C, 40,8 % a 930,4 hPa,
+- živé meranie bolo overené zmenou hodnôt po dýchnutí na senzor.
 
 ## Čo práve riešim
 
-Projekt je v prvej funkčnej ESPHome fáze. ESP32 je online v Home Assistant, diagnostické entity fungujú a základné ovládanie cez HA bolo overené reštartom zariadenia. Wi-Fi na balkóne je slabé, ale používateľ ho teraz nechce riešiť ako blokujúcu tému; zlepšenie pokrytia zostáva neskorší stabilizačný krok. Aktuálne sa čaká na objednaný hardvér pre prvé stolové testy senzorov, MOSFET spínania a čerpadla. Vodné rozvody k rastlinám sa budú navrhovať až po odmeraní reálneho prietoku čerpadla.
+Projekt je vo fáze prvých stolových hardvérových testov. ESP32 je online v Home Assistant, diagnostické entity fungujú a prvý externý senzor BME280 už odosiela teplotu, vlhkosť a tlak do HA. Wi-Fi na balkóne je slabé, ale používateľ ho teraz nechce riešiť ako blokujúcu tému; zlepšenie pokrytia zostáva neskorší stabilizačný krok. Ďalší vhodný krok je porovnanie BME280 s dostupným DHT11 alebo pokračovanie testom pôdneho vlhkomera.
 
 ## Najbližší odporúčaný krok
 
-Po doručení objednávky pokračovať stolovým testovaním bez vody pri rastlinách:
+Pokračovať stolovým testovaním bez vody pri rastlinách:
 
-1. pripojiť BME280 k ESP32 a dostať teplotu, vlhkosť a tlak do Home Assistant,
-2. porovnať hodnoty BME280 s dostupným DHT11 a prípadným existujúcim teplomerom v HA,
-3. otestovať pôdny vlhkomer nasucho a vo vlhkom substráte, najprv s dôrazom na bezpečné napäťové úrovne pre analógový vstup ESP32,
-4. otestovať MOSFET modul bez čerpadla alebo s bezpečnou skúšobnou záťažou,
-5. pripojiť čerpadlo cez MOSFET a v pohári odmerať reálny prietok v ml/min,
-6. výsledky zapísať do dokumentácie a až potom navrhnúť T-kusy, kvapkovače a rozvod k jahodám/paradajkám.
+1. porovnať hodnoty BME280 s dostupným DHT11 a prípadným existujúcim teplomerom v HA,
+2. otestovať pôdny vlhkomer nasucho a vo vlhkom substráte, najprv s dôrazom na bezpečné napäťové úrovne pre analógový vstup ESP32,
+3. otestovať MOSFET modul bez čerpadla alebo s bezpečnou skúšobnou záťažou,
+4. pripojiť čerpadlo cez MOSFET a v pohári odmerať reálny prietok v ml/min,
+5. výsledky zapísať do dokumentácie a až potom navrhnúť T-kusy, kvapkovače a rozvod k jahodám/paradajkám.
 
 ## Otvorené otázky a problémy
 
